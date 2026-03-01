@@ -1,0 +1,2 @@
+# Clippy linter configuration
+cognitive-complexity-threshold = 30

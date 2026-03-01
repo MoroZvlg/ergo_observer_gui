@@ -1,0 +1,43 @@
+[package]
+name = "gui"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = { version = "0.33", default-features = false, features = [
+    "default_fonts",
+    "glow",
+] }
+egui = "0.33.3"
+egui_extras = { version = "0.33.3", features = ["serde", "svg", "image"] }
+chrono = "0.4.42"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+ewebsock = {  version = "0.8", features = ["tls"] }
+rand = "0.9.2"
+log = "0.4"
+
+# Native-only dependencies
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+env_logger = "0.11"
+rustls = { version = "0.23", features = ["ring"] }
+
+# Web dependencies
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2", features = ["js"] }
+getrandom03 = { package = "getrandom", version = "0.3", features = ["wasm_js"] }
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+web-sys = "0.3"
+console_error_panic_hook = "0.1"
+console_log = "1.0"
+
+[profile.release]
+opt-level = 2
+lto = true
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 2

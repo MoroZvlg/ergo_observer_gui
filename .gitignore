@@ -1,0 +1,10 @@
+/target
+/Cargo.lock
+
+# Environment variables
+.env
+/dist
+
+.idea
+
+.claude/settings.local.json
